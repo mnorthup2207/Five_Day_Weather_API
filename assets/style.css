@@ -1,0 +1,9 @@
+body{
+    margin: 0 auto;
+}
+.header{
+    text-align: center;
+    color: whitesmoke;
+    background-color: black;
+    padding: .5rem;
+}
