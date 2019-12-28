@@ -15,10 +15,14 @@ function displayCityInfo() {
         console.log(response);
         var iconcode = (response.weather[0].icon)
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
-        var weatherEl = $("<img>").attr("src", iconurl)
-        console.log(iconurl)
         var cityDate = $("<h1>").text(response.name + " " + date);
-        $("#weatherData").append(cityDate);
+        cityDate.attr("class", "col-md-6");
+        var weatherEl = $("<img>").attr({
+            "src": iconurl,
+            "class": "col-md-1"
+        });
+        $(".weatherStrip").html(cityDate);
+        $(".weatherStrip").append(weatherEl);
         
 
     })
