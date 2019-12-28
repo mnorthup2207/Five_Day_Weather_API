@@ -4,7 +4,7 @@ var date = moment().subtract(10, 'days').calendar();
 
 function displayCityInfo() {
     var city = $(this).attr("data-name");
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=718a19e59fe8c687c0ff168450145d0e";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=718a19e59fe8c687c0ff168450145d0e&units=imperial";
 
     console.log(queryURL)
 
@@ -21,8 +21,20 @@ function displayCityInfo() {
             "src": iconurl,
             "class": "col-md-1"
         });
+        var temp = (response.main.temp);
+        var humidity = (response.main.humidity);
+        var wind = (response.wind.speed);
+        var UV = (response.main.humidity);
+        var para1 = $("<p>").text(`Temperature: ${temp}`);
+        var para2 = $("<p>").text(`Humidity: ${humidity}`);
+        var para3 = $("<p>").text(`Wind Speed: ${wind}`);
+        var para4 = $("<p>").text(`UV.Index: `);
         $(".weatherStrip").html(cityDate);
         $(".weatherStrip").append(weatherEl);
+        $(".weatherInfo").html(para1);
+        $(".weatherInfo").append(para2, para3, para4);
+
+
         
 
     })
