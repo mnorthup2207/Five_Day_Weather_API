@@ -11,7 +11,7 @@ function displayCityInfo() {
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response) {
+    }).then(function (response) {
         console.log(response);
         var iconcode = (response.weather[0].icon)
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
@@ -24,21 +24,31 @@ function displayCityInfo() {
         var temp = (response.main.temp);
         var humidity = (response.main.humidity);
         var wind = (response.wind.speed);
-        var UV = (response.main.humidity);
         var para1 = $("<p>").text(`Temperature: ${temp} °F`);
         var para2 = $("<p>").text(`Humidity: ${humidity}%`);
         var para3 = $("<p>").text(`Wind Speed: ${wind} MPH`);
-        var para4 = $("<p>").text(`UV.Index: `);
         $(".weatherStrip").html(cityDate);
         $(".weatherStrip").append(weatherEl);
         $(".weatherInfo").html(para1);
-        $(".weatherInfo").append(para2, para3, para4);
-
-
+        $(".weatherInfo").append(para2, para3);
         
+        var lon = (response.coord.lon);
+        var lat = (response.coord.lat);
+        var queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}`
+        
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            var uv = (response.value);
+            var para4 = $("<p>").text(`UV.Index: ${uv}`);
+            $(".weatherInfo").append(para4);
 
-    })
-  }
+
+        });
+    });
+};
 
 
 function renderBtn() {
@@ -53,7 +63,7 @@ function renderBtn() {
     };
 };
 
-$("#addBtn").on("click", function(event){
+$("#addBtn").on("click", function (event) {
     event.preventDefault();
     var city = $("#city-input").val().trim();
     cities.push(city);
