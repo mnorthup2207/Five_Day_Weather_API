@@ -1,5 +1,5 @@
 
-var cities = ["Strasbourg", "Walldorf", "Amsterdam"];
+var cities = ["Strasbourg", "Frankfurt", "Amsterdam"];
 var date = moment().format('MM/DD/YY');
 
 function displayCityInfo() {
@@ -54,26 +54,29 @@ function displayCityInfo() {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
-            console.log(queryURL)
-            
-            var timeEl1 = moment().add(1, 'days').format('MM/DD/YY'); 
-            var card = $("<div>").attr({
-                "data-name": timeEl1,
-                "class": "card"
-            });
-            $(".fiveDay").html(card);
-            var iconCode = (response.list[0].weather[0].icon);
-            var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
-            var iconDescrip = (response.list[0].weather[0].description)
-            var iconImg = $("<img>").attr({
-                "src": iconUrl,
-                "alt": iconDescrip
-            });
-            var temp = $("<p>").text(`Temp: ${response.list[0].main.temp}°F`);
-            var humidity = $("<p>").text(`Humidity: ${response.list[0].main.humidity}`);
-            card.append(timeEl1, iconImg, temp, humidity);
-            
+            var days = [1, 2, 3, 4, 5];
+            $(".fiveDay").empty();
+            for (var i = 0; i < days.length; i++) {
+                
+                var timeEl1 = $("<p>").text(moment.unix(response.list[i].dt).utc().format('MM/DD/YY'));
+                console.log(response.list[i].dt)
+                var iconCode = (response.list[i].weather[0].icon);
+                var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                var iconDescrip = (response.list[i].weather[0].description)
+                var iconImg = $("<img>").attr({
+                    "src": iconUrl,
+                    "alt": iconDescrip
+                });
+                var temp = $("<p>").text(`Temp: ${response.list[i].main.temp}°F`);
+                var humidity = $("<p>").text(`Humidity: ${response.list[i].main.humidity}%`);
+                var card = $("<div>").attr({
+                    "data-name": timeEl1,
+                    "class": "card"
+                });
+                $(".fiveDay").append(card);
+                card.append(timeEl1, iconImg, temp, humidity);
+            }
+
         });
 
     });
