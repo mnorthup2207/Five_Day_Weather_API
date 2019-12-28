@@ -25,9 +25,9 @@ function displayCityInfo() {
         var humidity = (response.main.humidity);
         var wind = (response.wind.speed);
         var UV = (response.main.humidity);
-        var para1 = $("<p>").text(`Temperature: ${temp}`);
-        var para2 = $("<p>").text(`Humidity: ${humidity}`);
-        var para3 = $("<p>").text(`Wind Speed: ${wind}`);
+        var para1 = $("<p>").text(`Temperature: ${temp} °F`);
+        var para2 = $("<p>").text(`Humidity: ${humidity}%`);
+        var para3 = $("<p>").text(`Wind Speed: ${wind} MPH`);
         var para4 = $("<p>").text(`UV.Index: `);
         $(".weatherStrip").html(cityDate);
         $(".weatherStrip").append(weatherEl);
