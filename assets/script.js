@@ -1,6 +1,6 @@
 
 var cities = ["Strasbourg", "Walldorf", "Amsterdam"];
-var date = moment().subtract(10, 'days').calendar();
+var date = moment().format('MM/DD/YY');
 
 function displayCityInfo() {
     var city = $(this).attr("data-name");
@@ -48,7 +48,7 @@ function displayCityInfo() {
 
         });
 
-        var queryURL = `http://api.openweathermap.org/data/2.5/forecast?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}`
+        var queryURL = `http://api.openweathermap.org/data/2.5/forecast?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}&units=imperial`
 
         $.ajax({
             url: queryURL,
@@ -56,7 +56,24 @@ function displayCityInfo() {
         }).then(function (response) {
             console.log(response);
             console.log(queryURL)
-
+            
+            var timeEl1 = moment().add(1, 'days').format('MM/DD/YY'); 
+            var card = $("<div>").attr({
+                "data-name": timeEl1,
+                "class": "card"
+            });
+            $(".fiveDay").html(card);
+            var iconCode = (response.list[0].weather[0].icon);
+            var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
+            var iconDescrip = (response.list[0].weather[0].description)
+            var iconImg = $("<img>").attr({
+                "src": iconUrl,
+                "alt": iconDescrip
+            });
+            var temp = $("<p>").text(`Temp: ${response.list[0].main.temp}°F`);
+            var humidity = $("<p>").text(`Humidity: ${response.list[0].main.humidity}`);
+            card.append(timeEl1, iconImg, temp, humidity);
+            
         });
 
     });
