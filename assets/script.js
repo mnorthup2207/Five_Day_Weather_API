@@ -6,13 +6,13 @@ function displayCityInfo() {
     var city = $(this).attr("data-name");
     var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=718a19e59fe8c687c0ff168450145d0e&units=imperial";
 
-    console.log(queryURL)
+    // console.log(queryURL)
 
     $.ajax({
         url: queryURL,
         method: "GET"
     }).then(function (response) {
-        console.log(response);
+        // console.log(response);
         var iconcode = (response.weather[0].icon)
         var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         var cityDate = $("<h1>").text(response.name + " " + date);
@@ -31,22 +31,34 @@ function displayCityInfo() {
         $(".weatherStrip").append(weatherEl);
         $(".weatherInfo").html(para1);
         $(".weatherInfo").append(para2, para3);
-        
+
         var lon = (response.coord.lon);
         var lat = (response.coord.lat);
         var queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}`
-        
+
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+            // console.log(response);
             var uv = (response.value);
             var para4 = $("<p>").text(`UV.Index: ${uv}`);
             $(".weatherInfo").append(para4);
 
 
         });
+
+        var queryURL = `http://api.openweathermap.org/data/2.5/forecast?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}`
+
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function (response) {
+            console.log(response);
+            console.log(queryURL)
+
+        });
+
     });
 };
 
