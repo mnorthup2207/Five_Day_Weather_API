@@ -48,17 +48,19 @@ function displayCityInfo() {
 
         });
 
-        var queryURL = `http://api.openweathermap.org/data/2.5/forecast?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}&units=imperial`
-
+        var queryURL = `http://api.openweathermap.org/data/2.5/forecast/?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}&units=imperial`
+        console.log(queryURL)
         $.ajax({
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            var days = [1, 2, 3, 4, 5];
+            var days = [1, 3, 6, 9, 12];
             $(".fiveDay").empty();
             for (var i = 0; i < days.length; i++) {
+                console.log(i);
                 
-                var timeEl1 = $("<p>").text(moment.unix(response.list[i].dt).utc().format('MM/DD/YY'));
+                var date = moment().add(i, 'days').format(`MM/DD/YY`)
+                var timeEl1 = $("<p>").text(date);
                 console.log(response.list[i].dt)
                 var iconCode = (response.list[i].weather[0].icon);
                 var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
@@ -70,7 +72,7 @@ function displayCityInfo() {
                 var temp = $("<p>").text(`Temp: ${response.list[i].main.temp}°F`);
                 var humidity = $("<p>").text(`Humidity: ${response.list[i].main.humidity}%`);
                 var card = $("<div>").attr({
-                    "data-name": timeEl1,
+                    "id": `id${i}`,
                     "class": "card"
                 });
                 $(".fiveDay").append(card);

@@ -1,10 +1,46 @@
 body{
     margin: 0 auto;
 }
-
+label{
+    width: 100%;
+    font-size: larger;
+    font-weight: bold;
+    margin-left: 3%;
+}
 .header{
     text-align: center;
     color: whitesmoke;
     background-color: black;
     padding: .5rem;
+    margin-bottom: 2%;
+}
+#city-input{
+    margin: 0% 0% 4% 3%;
+}
+#addBtn{
+    padding: 1%;
+    margin: 1%;
+}
+.city{
+    width: 90%;
+    margin: 1% 5%;
+}
+.weatherInfo{
+    font-weight: 600;
+}
+#cityBtn{
+    margin-left: 5%;
+    border: solid whitesmoke .25rem;
+    background-color: whitesmoke;
+    border-radius: 5%;
+}
+#id0, #id1, #id2, #id3, #id4 {
+    width: 15%;
+    background-color: #0069D9;
+    font-size: large;
+    font-weight: 600;
+    margin-right: 3%;
+}
+img{
+    width: 50%;
 }
