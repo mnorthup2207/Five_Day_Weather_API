@@ -44,3 +44,18 @@ label{
 img{
     width: 50%;
 }
+@media screen and (max-width: 500px) {
+    #city-input{
+        width: 70%;
+        margin: 1% 0% 5% 15%;
+    }
+    #pic{
+        width: 15%;
+    }
+    .weatherInfo, .weatherStrip, .fiveDay {
+        margin: 0% 0% 5% 5%;
+    }
+    #id0, #id1, #id2, #id3, #id4{
+        width: 45%;
+    }
+}

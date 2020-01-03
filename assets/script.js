@@ -19,7 +19,8 @@ function displayCityInfo() {
         cityDate.attr("class", "col-md-6");
         var weatherEl = $("<img>").attr({
             "src": iconurl,
-            "class": "col-md-1"
+            "class": "col-md-1",
+            "id": "pic"
         });
         var temp = (response.main.temp);
         var humidity = (response.main.humidity);
