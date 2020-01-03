@@ -4,7 +4,7 @@ var date = moment().format('MM/DD/YY');
 
 function displayCityInfo() {
     var city = $(this).attr("data-name");
-    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=718a19e59fe8c687c0ff168450145d0e&units=imperial";
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=718a19e59fe8c687c0ff168450145d0e&units=imperial";
 
     // console.log(queryURL)
 
