@@ -4,7 +4,7 @@ var date = moment().format('MM/DD/YY');
 
 function displayCityInfo() {
     var city = $(this).attr("data-name");
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=718a19e59fe8c687c0ff168450145d0e&units=imperial";
+    var queryURL = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=718a19e59fe8c687c0ff168450145d0e&units=imperial";
 
     // console.log(queryURL)
 
@@ -14,7 +14,7 @@ function displayCityInfo() {
     }).then(function (response) {
         // console.log(response);
         var iconcode = (response.weather[0].icon)
-        var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
+        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
         var cityDate = $("<h1>").text(response.name + " " + date);
         cityDate.attr("class", "col-md-6");
         var weatherEl = $("<img>").attr({
@@ -34,7 +34,7 @@ function displayCityInfo() {
 
         var lon = (response.coord.lon);
         var lat = (response.coord.lat);
-        var queryURL = `https://api.openweathermap.org/data/2.5/uvi?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}`
+        var queryURL = `http://api.openweathermap.org/data/2.5/uvi?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}`
 
         $.ajax({
             url: queryURL,
@@ -48,7 +48,7 @@ function displayCityInfo() {
 
         });
 
-        var queryURL = `https://api.openweathermap.org/data/2.5/forecast/?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}&units=imperial`
+        var queryURL = `http://api.openweathermap.org/data/2.5/forecast/?appid=718a19e59fe8c687c0ff168450145d0e&lat=${lat}&lon=${lon}&units=imperial`
         // console.log(queryURL)
         $.ajax({
             url: queryURL,
@@ -63,7 +63,7 @@ function displayCityInfo() {
                 var timeEl1 = $("<p>").text(date);
                 // console.log(response.list[i].dt)
                 var iconCode = (response.list[i].weather[0].icon);
-                var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
+                var iconUrl = "http://openweathermap.org/img/w/" + iconCode + ".png";
                 var iconDescrip = (response.list[i].weather[0].description)
                 var iconImg = $("<img>").attr({
                     "src": iconUrl,
